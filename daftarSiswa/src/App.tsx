@@ -1,23 +1,26 @@
-import { useState } from 'react'
-import './App.css'
+// import { useState } from 'react'
+import SiswaModel from "./models/SiswaModel.ts"
+import Siswa from "./models/Siswa.ts"
+
+const siswaModel = new SiswaModel()
+siswaModel.addSiswa(new Siswa(123, "John Doe", "Laki", "XII", "RPL"))
+siswaModel.addSiswa(new Siswa(124, "Jane Doe", "Perempuan", "XI", "Boga"))
+siswaModel.addSiswa(new Siswa(125, "John Smith", "Laki", "X", "Seni"))
+siswaModel.addSiswa(new Siswa(126, "Jane Smith", "Perempuan", "XI", "Busana"))
+siswaModel.addSiswa(new Siswa(127, "John Appleseed", "Laki", "XII", "Perhotelan"))
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const siswa = siswaModel.getSiswaBy({ kelas: "XII", jurusan: "Perhotelan" }) as Siswa
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Data Siswa</h1>
+      <span>NIS : {siswa.nis}</span><br />
+      <span>Nama : {siswa.nama}</span><br />
+      <span>Gender : {siswa.gender}</span><br />
+      <span>Kelas : {siswa.kelas}</span><br />
+      <span>Jurusan : {siswa.jurusan}</span><br />
     </>
   )
 }
