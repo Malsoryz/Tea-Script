@@ -9,18 +9,30 @@ siswaModel.addSiswa(new Siswa(125, "John Smith", "Laki", "X", "Seni"))
 siswaModel.addSiswa(new Siswa(126, "Jane Smith", "Perempuan", "XI", "Busana"))
 siswaModel.addSiswa(new Siswa(127, "John Appleseed", "Laki", "XII", "Perhotelan"))
 
-function App() {
+siswaModel.removeSiswa({
+    gender: "Laki",
+    kelas: "XII",
+    jurusan: "Perhotelan"
+  } as Siswa)
 
-  const siswa = siswaModel.getSiswaBy({ kelas: "XII", jurusan: "Perhotelan" }) as Siswa
+function App() {
+  const siswaArray = siswaModel.getSiswaAll()
 
   return (
     <>
       <h1>Data Siswa</h1>
-      <span>NIS : {siswa.nis}</span><br />
-      <span>Nama : {siswa.nama}</span><br />
-      <span>Gender : {siswa.gender}</span><br />
-      <span>Kelas : {siswa.kelas}</span><br />
-      <span>Jurusan : {siswa.jurusan}</span><br />
+      <hr />
+      { siswaArray.map((siswa, index) => (
+        <div key={index}>
+          <h3>Siswa {index + 1}</h3>
+          <span>NIS : {siswa.nis}</span><br />
+          <span>Nama : {siswa.nama}</span><br />
+          <span>Gender : {siswa.gender}</span><br />
+          <span>Kelas : {siswa.kelas}</span><br />
+          <span>Jurusan : {siswa.jurusan}</span><br />
+          <hr />
+        </div>
+      )) }
     </>
   )
 }

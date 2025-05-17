@@ -15,9 +15,13 @@ export default class SiswaModel {
   public addSiswa(siswa: Siswa): void {
     this.siswaAll.push(siswa)
   }
-  public removeSiswa(siswa: Siswa): void {
-    const index = this.siswaAll.indexOf(siswa)
-    if (index > -1) {
+  public removeSiswa(arg: Partial<Siswa>): void {
+    const index = this.siswaAll.findIndex((siswa) => {
+      return Object.entries(arg).every(([key, value]) => {
+        return siswa[key as keyof Siswa] === value
+      })
+    })
+    if (index !== -1) {
       this.siswaAll.splice(index, 1)
     }
   }
