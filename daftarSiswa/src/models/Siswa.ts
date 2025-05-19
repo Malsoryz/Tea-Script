@@ -44,7 +44,6 @@ export default class Siswa {
     } else throw new Error(`"${jurusan}" is not one of "${(jurusanAll as string[]).join('", "')}"`)
   }
 
-  
   public set nis(v : number) {
     this._nis = v;
   }

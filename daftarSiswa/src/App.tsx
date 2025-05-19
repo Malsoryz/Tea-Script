@@ -10,10 +10,8 @@ siswaModel.addSiswa(new Siswa(126, "Jane Smith", "Perempuan", "XI", "Busana"))
 siswaModel.addSiswa(new Siswa(127, "John Appleseed", "Laki", "XII", "Perhotelan"))
 
 siswaModel.removeSiswa({
-    gender: "Laki",
-    kelas: "XII",
-    jurusan: "Perhotelan"
-  } as Siswa)
+  gender: "Perempuan",
+})
 
 function App() {
   const siswaArray = siswaModel.getSiswaAll()
