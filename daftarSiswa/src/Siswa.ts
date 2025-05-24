@@ -80,3 +80,7 @@ export default class Siswa {
   }
   
 }
+
+export const listGender = genderAll as Array<string>
+export const listKelas = kelasAll as Array<string>
+export const listJurusan = jurusanAll as Array<string>
