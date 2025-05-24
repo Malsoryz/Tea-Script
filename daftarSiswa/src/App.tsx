@@ -1,38 +1,59 @@
-// import { useState } from 'react'
-import SiswaModel from "./models/SiswaModel.ts"
-import Siswa from "./models/Siswa.ts"
+import { useState, useEffect } from 'react'
+import Siswa from './Siswa.ts'
 
-const siswaModel = new SiswaModel()
-siswaModel.addSiswa(new Siswa(123, "John Doe", "Laki", "XII", "RPL"))
-siswaModel.addSiswa(new Siswa(124, "Jane Doe", "Perempuan", "XI", "Boga"))
-siswaModel.addSiswa(new Siswa(125, "John Smith", "Laki", "X", "Seni"))
-siswaModel.addSiswa(new Siswa(126, "Jane Smith", "Perempuan", "XI", "Busana"))
-siswaModel.addSiswa(new Siswa(127, "John Appleseed", "Laki", "XII", "Perhotelan"))
-
-siswaModel.removeSiswa({
-  gender: "Perempuan",
-})
-
-function App() {
-  const siswaArray = siswaModel.getSiswaAll()
-
+export default function App() {
+  const [ listSiswa, setListSiswa ] = useState<Array<Siswa>>([])
+  
   return (
     <>
-      <h1>Data Siswa</h1>
-      <hr />
-      { siswaArray.map((siswa, index) => (
-        <div key={index}>
-          <h3>Siswa {index + 1}</h3>
-          <span>NIS : {siswa.nis}</span><br />
-          <span>Nama : {siswa.nama}</span><br />
-          <span>Gender : {siswa.gender}</span><br />
-          <span>Kelas : {siswa.kelas}</span><br />
-          <span>Jurusan : {siswa.jurusan}</span><br />
-          <hr />
-        </div>
-      )) }
+      <Modal />
+      <div className="overflow-x-auto">
+        <table className="table table-xs table-zebra">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>NIS</th>
+              <th>Nama</th>
+              <th>Jenis Kelamin</th>
+              <th>Kelas</th>
+              <th>Jurusan</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listSiswa.map((siswa, index) => (
+            <tr>
+              <td>{ index + 1 }</td>
+              <td>{ siswa.nis }</td>
+              <td>{ siswa.nama }</td>
+              <td>{ siswa.gender }</td>
+              <td>{ siswa.kelas }</td>
+              <td>{ siswa.jurusan }</td>
+            </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }
 
-export default App
+function Modal() {
+  return (
+    <>
+      <button className="btn btn-soft btn-primary" onClick={
+        () => document.getElementById('insert-modal').showModal()
+      }>Tambah</button>
+      <dialog id="insert-modal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Tambah data baru</h3>
+          <form>
+            <input type="number" placeholder="NIS" className="input"/>
+          </form>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </>
+  )
+}
